@@ -1,5 +1,5 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
+
 internal class Program
 {
     private static void Main(string[] args)
@@ -7,27 +7,54 @@ internal class Program
         double peso, altura, imc;
         char sexo;
 
-        do
+        double Peso()
         {
-            Console.WriteLine("Digite o peso");
-            peso = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
-        } while (peso <= 0.0);
+            double peso = 0.0;
 
-        do
+            do
+            {
+                Console.WriteLine("Digite o peso");
+                peso = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+            } while (peso <= 0.0);
+
+            return peso;
+        }
+
+        double Altura()
         {
-            Console.WriteLine("Digite a altura");
-            altura = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
-        } while (altura <= 0.0);
+            double altura = 0.0;
 
-        do
+            do
+            {
+                Console.WriteLine("Digite a altura");
+                altura = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+            } while (altura <= 0.0);
+
+            return altura;
+        }
+
+        char Sexo()
         {
-            Console.WriteLine("Digite o sexo");
-            sexo = char.Parse(Console.ReadLine());
-        } while (sexo != 'f' && sexo != 'F' && sexo != 'm' && sexo != 'M');
+            char sexo;
 
-        imc = peso / Math.Pow(altura, 2.0);
+            do
+            {
+                Console.WriteLine("Digite o sexo");
+                sexo = char.Parse(Console.ReadLine());
 
-        if (sexo == 'M' || sexo == 'm')
+            } while (sexo != 'f' && sexo != 'F' && sexo != 'm' && sexo != 'M');
+
+            return sexo;
+        }
+
+        double CalculoIMC()
+        {
+            imc = peso / Math.Pow(altura, 2.0);
+
+            return imc;
+        }
+
+        void IMCMasculino()
         {
             if (imc < 20.7)
             {
@@ -59,7 +86,8 @@ internal class Program
                 }
             }
         }
-        else
+
+        void IMCFeminino()
         {
             if (imc < 19.1)
             {
@@ -90,7 +118,24 @@ internal class Program
                     }
                 }
             }
+
+        }
+
+        peso = Peso();
+        altura = Altura();
+        sexo = Sexo();
+
+        imc = CalculoIMC();
+
+        if (sexo == 'm' || sexo == 'M')
+        {
+            IMCMasculino();
+        }
+        else
+        {
+            IMCFeminino();
         }
 
     }
+
 }
